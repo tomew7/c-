@@ -1,0 +1,58 @@
+#include <Servo.h>
+
+Servo servo_1;
+Servo servo_2;
+int posicion_servo = 0;
+
+int trig=9;
+int eco=8;
+int led1=10;
+int led2=11;
+int duracion;
+int distancia;
+
+
+void setup(){
+servo_1.attach(13,500,2500); 
+  servo_2.attach(12,500,2500); 
+  servo_1.write(0);
+  servo_2.write(0);
+  
+  pinMode(trig, OUTPUT);
+  pinMode(eco,INPUT);
+  
+   pinMode(led1,OUTPUT);
+   pinMode(led2,OUTPUT);
+  
+  Serial.begin(9600);
+}
+
+void loop(){
+  digitalWrite(trig,HIGH);
+    delay(1);
+  digitalWrite(trig,LOW);
+  duracion= pulseIn(eco,HIGH);
+  distancia=duracion/58.8;
+  Serial.println(distancia);
+delay(200);
+  
+  if(distancia<=150&& distancia>=0){
+  digitalWrite(led1,HIGH);
+  servo_1.write(100);
+    servo_2.write(100);
+    delay (distancia*10);
+  digitalWrite(led1,LOW); 
+ 
+  }
+    
+    else{ 
+  (distancia<=300&& distancia>=152);
+  digitalWrite(led2,HIGH);
+        servo_1.write(0);
+    servo_2.write(0);
+ 
+      delay (distancia*10);
+  digitalWrite(led2,LOW);
+
+}
+}  

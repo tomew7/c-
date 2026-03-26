@@ -1,0 +1,44 @@
+#include <Wire.h>
+
+#include <LiquidCrystal.h>
+
+#include <LiquidCrystal_I2C.h>
+
+
+LiquidCrystal_I2C lcd(0x20,16,2);
+
+int trig=10;
+int eco=9;
+int duracion;
+int distancia;
+
+void setup(){
+  pinMode(trig,OUTPUT);
+    pinMode(eco,INPUT);
+  pinMode(3,OUTPUT);
+  Serial.begin(9600);
+  lcd.init();
+  lcd.backlight();
+}
+void loop(){
+  digitalWrite(trig,HIGH);
+    delay(1);
+  digitalWrite(trig,LOW);
+  duracion= pulseIn(eco,HIGH);
+  distancia=(duracion*0.034)/2;
+  Serial.println(distancia);
+delay(200);
+  if(distancia<=40&& distancia>=0){
+  lcd.print("muy cerca");
+  lcd.setCursor(0,0);
+  delay(10);
+}
+   if
+
+     (distancia<=80&& distancia>=41) {
+     lcd.print("cerca");
+     lcd.setCursor(0,0);
+  delay(10);
+}
+
+}

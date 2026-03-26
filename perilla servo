@@ -1,0 +1,33 @@
+#include <Wire.h>
+
+#include <LiquidCrystal.h>
+
+#include <LiquidCrystal_I2C.h>
+
+#include <Servo.h>
+ 
+ LiquidCrystal_I2C lcd (0x20,16,2);
+
+Servo servo_2;
+int sensor= A0;
+int valor;
+int grados;
+
+void setup()
+{
+ Serial.begin(9600);
+  lcd.init();
+  lcd.backlight();
+ servo_2.attach (2,500,2500);
+}
+
+void loop()
+{
+  valor=analogRead(sensor);
+  grados=map(valor, 0,1023,0,180);
+  servo_2.write(grados);
+  Serial.println(valor);
+  lcd.setCursor(0,0);
+  lcd.print(grados);
+  delay(10);
+}

@@ -1,0 +1,18 @@
+int led1= 11;
+int pulsador1=7;
+
+void setup()
+{
+  pinMode(led1, OUTPUT);
+  pinMode(pulsador1,INPUT);
+}
+
+void loop()
+{
+  if (digitalRead(7)==HIGH){
+  digitalWrite(led1,HIGH);
+}
+  else{
+    digitalWrite(led1,LOW);
+  }
+}
